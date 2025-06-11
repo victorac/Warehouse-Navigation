@@ -1,14 +1,18 @@
 # Warehouse-Navigation
 
-This project is a fork of [GTSupplyChainAR]'s [Warehouse-Navigation](https://github.com/GTSupplyChainAR/Warehouse-Navigation) repository.
+This project is a fork of [GTSupplyChainAR](https://github.com/GTSupplyChainAR)'s [Warehouse-Navigation](https://github.com/GTSupplyChainAR/Warehouse-Navigation) repository.
 
 Web app demonstrating order picking algorithms
 
 ## Installation
 
-1. `git clone https://github.com/GTSupplyChainAR/Warehouse-Navigation.git`
-2. `cd Warehouse-Navigation`
-3. `virtualenv venv`
-4. `pip install -r requirements.txt`
-5. `python app.py`
-6. Open `localhost:5000`
+### Using Poetry (recommended)
+
+```bash
+git clone https://github.com/victorac/Warehouse-Navigation.git
+cd Warehouse-Navigation
+poetry install
+poetry run navigation
+```
+
+Open `localhost:5000`
