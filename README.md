@@ -11,6 +11,7 @@ Web app demonstrating order picking algorithms
 ```bash
 git clone https://github.com/victorac/Warehouse-Navigation.git
 cd Warehouse-Navigation
+git checkout feat/create-package
 poetry install
 poetry run navigation
 ```
