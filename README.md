@@ -16,4 +16,4 @@ poetry install
 poetry run navigation
 ```
 
-Open `localhost:5000`
+Open `localhost:8000`

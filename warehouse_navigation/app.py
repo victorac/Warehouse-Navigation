@@ -74,7 +74,7 @@ def find_pick_path(warehouse_id):
 
 
 def main():
-    app.run(debug=True)
+    app.run(debug=True,port=8000)
 
 if __name__ == "__main__":
     main()
