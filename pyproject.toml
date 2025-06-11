@@ -1,0 +1,25 @@
+[project]
+name = "warehouse-navigation"
+version = "0.1.0"
+description = "A warehouse navigation system, forked from GTSupplyChainAR's repository"
+authors = [{name = "Your Name",email = "you@example.com"}]
+readme = "README.md"
+repository = "https://github.com/victorac/Warehouse-Navigation"
+homepage = "https://github.com/GTSupplyChainAR/Warehouse-Navigation"
+requires-python = ">=3.13"
+dependencies = [
+    "flask (>=3.1.1,<4.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+    "networkx (>=3.5,<4.0)",
+    "numpy (>=2.3.0,<3.0.0)"
+]
+
+[tool.poetry.scripts]
+navigation = "warehouse_navigation.app:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+"Original Repository" = "https://github.com/GTSupplyChainAR/Warehouse-Navigation"

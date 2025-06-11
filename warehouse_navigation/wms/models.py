@@ -1,7 +1,7 @@
 import typing
 import networkx as nx
-from tsp import tsp_circuit
-from utils import manhattan_distance
+from warehouse_navigation.wms.tsp import tsp_circuit
+from warehouse_navigation.wms.utils import manhattan_distance
 
 
 PositionType = typing.Tuple[int, int]
@@ -12,12 +12,16 @@ class GridWarehouse(object):
     grid = None  # type: [[GridWarehouseCell]]
     graph = None  # type: nx.Graph
 
-    def __init__(self, dimensions, grid):  # type: (PositionType, [[GridWarehouseCell]]) -> None
+    def __init__(
+        self, dimensions, grid
+    ):  # type: (PositionType, [[GridWarehouseCell]]) -> None
         self.dimensions = dimensions
         self.grid = grid
         self.graph = self._construct_graph()
-    
-    def find_path(self, from_node, to_node):  # type: (PositionType, PositionType) -> [PositionType]
+
+    def find_path(
+        self, from_node, to_node
+    ):  # type: (PositionType, PositionType) -> [PositionType]
         return nx.shortest_path(self.graph, from_node, to_node)
 
     def find_pick_path(self, from_node, intermediate_nodes):
@@ -45,13 +49,14 @@ class GridWarehouse(object):
             # Get the last cell of the path
             current_cell = final_path[-1]
             # Find the path to the next node (remove the first element with is equal to current_node)
-            path_to_next_cell = nx.shortest_path(self.graph, current_cell, next_cell)[1:]
+            path_to_next_cell = nx.shortest_path(self.graph, current_cell, next_cell)[
+                1:
+            ]
             # Add in all cells from the path to the next cell
             for path_cell in path_to_next_cell:
                 final_path.append(path_cell)
 
         return final_path
-
 
     def distance(self, from_cell, to_cell):
         """
@@ -71,9 +76,9 @@ class GridWarehouse(object):
                 else:
                     raise TypeError("Unknown cell type: %s" % type(cell))
             row_strings.append("\t".join(column_strings) + "\n")
-        return \
-            "Grid Warehouse (%d height x %d width)\n" % self.dimensions + \
-            "".join(row_strings)
+        return "Grid Warehouse (%d height x %d width)\n" % self.dimensions + "".join(
+            row_strings
+        )
 
     def _construct_graph(self):  # type: () -> nx.Graph
         graph = nx.Graph()
@@ -93,14 +98,20 @@ class GridWarehouse(object):
 
                 cell_coordinates = (i, j)
 
-                neighbor_coordinates = self._get_neighboring_navigation_cells(cell_coordinates)
+                neighbor_coordinates = self._get_neighboring_navigation_cells(
+                    cell_coordinates
+                )
 
-                for neighbor_cell_coordinate in neighbor_coordinates:  # type: typing.Tuple(int, int)
+                for (
+                    neighbor_cell_coordinate
+                ) in neighbor_coordinates:  # type: typing.Tuple(int, int)
                     graph.add_edge(cell_coordinates, neighbor_cell_coordinate, weight=1)
 
         return graph
 
-    def _get_neighboring_navigation_cells(self, origin_cell_coordinates):  # type: () -> [typing.Tuple(int, int)]
+    def _get_neighboring_navigation_cells(
+        self, origin_cell_coordinates
+    ):  # type: () -> [typing.Tuple(int, int)]
         offsets = [
             (-1, 0),
             (0, +1),
@@ -111,15 +122,26 @@ class GridWarehouse(object):
         neighbors = []
 
         for offset_x, offset_y in offsets:
-            neighbor_coordinate_to_examine = (origin_cell_coordinates[0] + offset_x, origin_cell_coordinates[1] + offset_y)
+            neighbor_coordinate_to_examine = (
+                origin_cell_coordinates[0] + offset_x,
+                origin_cell_coordinates[1] + offset_y,
+            )
 
-            if neighbor_coordinate_to_examine[0] < 0 or neighbor_coordinate_to_examine[0] >= self.dimensions[0]:
+            if (
+                neighbor_coordinate_to_examine[0] < 0
+                or neighbor_coordinate_to_examine[0] >= self.dimensions[0]
+            ):
                 continue
 
-            if neighbor_coordinate_to_examine[1] < 0 or neighbor_coordinate_to_examine[1] >= self.dimensions[1]:
+            if (
+                neighbor_coordinate_to_examine[1] < 0
+                or neighbor_coordinate_to_examine[1] >= self.dimensions[1]
+            ):
                 continue
 
-            neighbor_cell = self.grid[neighbor_coordinate_to_examine[0]][neighbor_coordinate_to_examine[1]]
+            neighbor_cell = self.grid[neighbor_coordinate_to_examine[0]][
+                neighbor_coordinate_to_examine[1]
+            ]
 
             if not isinstance(neighbor_cell, NavigableTileCell):
                 continue

@@ -2,8 +2,8 @@
 Contains layouts for different grid warehouses
 """
 
-from models import GridWarehouse, NavigableTileCell, ShelvingCell, Direction
-import utils
+from .models import GridWarehouse, NavigableTileCell, ShelvingCell, Direction
+from warehouse_navigation.wms import utils
 import copy
 
 

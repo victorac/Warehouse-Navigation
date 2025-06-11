@@ -1,4 +1,7 @@
 # Warehouse-Navigation
+
+This project is a fork of [GTSupplyChainAR]'s [Warehouse-Navigation](https://github.com/GTSupplyChainAR/Warehouse-Navigation) repository.
+
 Web app demonstrating order picking algorithms
 
 ## Installation
